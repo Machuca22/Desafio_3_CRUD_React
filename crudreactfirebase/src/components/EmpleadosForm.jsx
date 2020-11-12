@@ -8,7 +8,12 @@ const EmpleadosForm = (props) => {
     codigo: "",
     nombre: "",
     apellido: "",
-    hTrabajo: "",
+    hTrabajo: 0,
+    salarioL: 0,
+    salarioN: 0,
+    AFP: 0,
+    ISSS: 0,
+    renta: 0,
   };
 
   const [values, setValues] = useState(initialStateValues);
@@ -22,7 +27,7 @@ const EmpleadosForm = (props) => {
     e.preventDefault();
 
     props.addOrEditEmpleado(values);
-    setValues({ ...initialStateValues });
+    setValues({ ...initialStateValues});
   };
 
   const getEmpleadoById = async (id) => {
@@ -95,7 +100,7 @@ const EmpleadosForm = (props) => {
           <i className="material-icons">Horas de Trabajo</i>
         </div>
         <input
-          type="text"
+          type="number"
           value={values.hTrabajo}
           name="hTrabajo"
           placeholder="Ingrese Horas de Trabajo"
