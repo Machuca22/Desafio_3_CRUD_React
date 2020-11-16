@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../Firebase";
+import { firestore } from "../../Firebase";
 //import { toast } from "react-toastify";
 
 const EmpleadosForm = (props) => {
@@ -31,7 +31,7 @@ const EmpleadosForm = (props) => {
   };
 
   const getEmpleadoById = async (id) => {
-    const doc = await db.collection("Empleados").doc(id).get();
+    const doc = await firestore.collection("Empleados").doc(id).get();
     setValues({ ...doc.data() });
   };
 

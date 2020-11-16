@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
 import EmpleadosForm from "./EmpleadosForm";
 
-import { db } from "../Firebase";
+import { firestore } from "../../Firebase";
 import { toast } from "react-toastify";
 import MenorSalario from "./MenorSalario";
 import MayorSalario from "./MayorSalario";
 
+
 const Empleados = () => {
+  <div>
+  <nav>
+      <div className="logo">Parcial DPS</div>
+      <ul className="nav-links">
+          <li><a>Home</a></li>
+          <li><a>Admin</a></li>
+          <li><a>Log Out</a></li>
+      </ul>
+  </nav>
+</div>
   const [Empleados, setEmpleados] = useState([]);
   const [Empleado, setEmpleado] = useState([]);
   const [currentId, setCurrentId] = useState("");
 
   const getEmpleados = async () => {
-    //db.collection('Empleados').orderBy('salarioN', 'asc').limit(1).onSnapshot((querySnapshot) => {
-    db.collection("Empleados").onSnapshot((querySnapshot) => {
+    //firestore.collection('Empleados').orderBy('salarioN', 'asc').limit(1).onSnapshot((querySnapshot) => {
+    firestore.collection("Empleados").onSnapshot((querySnapshot) => {
       const docs = [];
       querySnapshot.forEach((doc) => {
         docs.push({ ...doc.data(), id: doc.id });
@@ -24,7 +35,7 @@ const Empleados = () => {
 
   const onDeleteEmpleado = async (id) => {
     if (window.confirm("Esta seguro de eliminar este empleado?")) {
-      await db.collection("Empleados").doc(id).delete();
+      await firestore.collection("Empleados").doc(id).delete();
       toast("Se elimino un empleado", {
         type: "error",
         //autoClose: 2000
@@ -33,7 +44,7 @@ const Empleados = () => {
   };
 
   const detalleEmpleado = async (id) => {
-      db.collection("Empleados").doc(id).get()
+      firestore.collection("Empleados").doc(id).get()
       .then(doc => {
         if (!doc.exists) {
           console.log('No such document!');
@@ -65,7 +76,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc().set(EmpleadoObject);
+          await firestore.collection("Empleados").doc().set(EmpleadoObject);
           toast("Se agrego un Empleado", {
             type: "success",
           });
@@ -75,7 +86,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc().set(EmpleadoObject);
+          await firestore.collection("Empleados").doc().set(EmpleadoObject);
           toast("Se agrego un Empleado", {
             type: "success",
           });
@@ -85,7 +96,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc().set(EmpleadoObject);
+          await firestore.collection("Empleados").doc().set(EmpleadoObject);
           toast("Se agrego un Empleado", {
             type: "success",
           });
@@ -96,7 +107,7 @@ const Empleados = () => {
           });
         }
       } else {
-        /*await db.collection("Empleados").doc(currentId).update(EmpleadoObject);
+        /*await firestore.collection("Empleados").doc(currentId).update(EmpleadoObject);
         toast("Se actualizo un Empleado", {
           type: "info",
         });
@@ -107,7 +118,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc(currentId).update(EmpleadoObject);
+          await firestore.collection("Empleados").doc(currentId).update(EmpleadoObject);
           toast("Se actualizo un Empleado", {
             type: "info",
           });
@@ -118,7 +129,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc(currentId).update(EmpleadoObject);
+          await firestore.collection("Empleados").doc(currentId).update(EmpleadoObject);
           toast("Se actualizo un Empleado", {
             type: "info",
           });
@@ -129,7 +140,7 @@ const Empleados = () => {
           EmpleadoObject.ISSS = EmpleadoObject.salarioL * 0.0525;
           EmpleadoObject.renta = EmpleadoObject.salarioL * 0.10;
           EmpleadoObject.salarioN = EmpleadoObject.salarioL - EmpleadoObject.AFP- EmpleadoObject.ISSS - EmpleadoObject.renta;
-          await db.collection("Empleados").doc(currentId).update(EmpleadoObject);
+          await firestore.collection("Empleados").doc(currentId).update(EmpleadoObject);
           toast("Se actualizo un Empleado", {
             type: "info",
           });

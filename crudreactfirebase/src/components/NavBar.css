@@ -1,0 +1,39 @@
+/*Navbar Styles*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  li{
+    list-style-type: none;
+  }
+  a{
+    text-decoration: none;
+  }
+  nav{
+    display: flex !important;
+    justify-content: space-around;
+    min-height: 10vh;
+    align-items: center;
+    background-color: navy;
+    color:white;
+  }
+  nav .logo{
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: capitalize; 
+  }
+  nav .nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+  }
+  nav .nav-links a{
+    font-size: 20px;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  nav .nav-links a:hover{
+    border-bottom: 1px solid #fff;
+  }
+  /*End Navbar Styles*/

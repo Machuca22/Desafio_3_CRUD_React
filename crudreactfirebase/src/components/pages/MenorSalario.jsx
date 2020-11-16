@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Empleadoss from "./Empleado";
-import { db } from "../Firebase";
+import { firestore } from "../../Firebase";
 
 const MenorSalario = () => {
   const [Empleados, setEmpleados] = useState([]);
   const [currentId, setCurrentId] = useState("");
 
   const getEmpleados = async () => {
-    db.collection('Empleados').orderBy('salarioN', 'asc').limit(1).onSnapshot((querySnapshot) => {
+    firestore.collection('Empleados').orderBy('salarioN', 'asc').limit(1).onSnapshot((querySnapshot) => {
       const docs = [];
       querySnapshot.forEach((doc) => {
         docs.push({ ...doc.data(), id: doc.id });
